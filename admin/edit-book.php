@@ -223,9 +223,11 @@ $page_title = 'Edit Data Buku';
                         <!-- Sinopsis (Full Width) -->
                         <div class="mb-6">
                             <label for="synopsis" class="block text-sm font-medium text-gray-400 mb-1">Synopsis</label>
-                            <textarea id="synopsis" name="synopsis" rows="6" required placeholder="e.g. A detailed summary of the book's plot and themes."
-                                    class="w-full bg-[#4F4F4F] text-white rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-purple-400 border border-gray-600">
-                            </textarea> 
+                            <textarea id="synopsis" name="synopsis" rows="6" required
+                            class="w-full bg-[#4F4F4F] text-white rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-purple-400 border border-gray-600"><?php 
+                                echo htmlspecialchars($synopsis); 
+                            ?></textarea>
+
                         </div>
                         
                         <!-- Tombol Submit -->
