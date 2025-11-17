@@ -60,28 +60,90 @@ if ($result = mysqli_query($link, $sql)) {
 <body class="bg-gray-100 text-gray-800">
     <!-- Asumsi Anda memiliki Header/Sidebar Admin yang sesuai -->
     <div class="flex h-screen bg-[#212121] text-white">
-        <!-- Sidebar Navigation -->
-        <nav class="w-64 bg-[#333333] p-6 flex flex-col justify-between">
-            <div>
-                <div class="flex flex-col items-center mb-10">
-                    <h3 class="font-bold text-lg">Admin Dashboard</h3>
-                    <p class="text-sm bg-red-500 px-3 py-1 rounded-full mt-2">Administrator</p>
-                </div>
-                <ul>
-                    <li class="nav-item rounded-lg mb-2"><a href="data-buku.php" class="flex items-center p-3 rounded-lg"><i data-lucide="book-open" class="mr-3"></i>Data Buku</a></li>
-                    <li class="nav-item rounded-lg mb-2"><a href="data-anggota.php" class="flex items-center p-3 rounded-lg"><i data-lucide="users" class="mr-3"></i>Data Anggota</a></li>
-                    <li class="nav-item rounded-lg mb-2 active-nav"><a href="transaksi.php" class="flex items-center p-3 rounded-lg"><i data-lucide="clipboard-list" class="mr-3"></i>Transaksi</a></li>
-                    <li class="nav-item rounded-lg mb-2"><a href="laporan.php" class="flex items-center p-3 rounded-lg"><i data-lucide="bar-chart-3" class="mr-3"></i>Laporan</a></li>
-                    <li class="nav-item rounded-lg mb-2">
-                        <a href="profil-admin.php" class="flex items-center p-3 rounded-lg">
-                        <i data-lucide="user-cog" class="mr-3"></i>Edit Profil</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                 <a href="../php/logout.php" class="flex items-center p-3 rounded-lg nav-item"><i data-lucide="log-out" class="mr-3"></i>Logout</a>
-            </div>
-        </nav>
+<!-- Sidebar Admin -->
+<nav class="w-64 bg-[#333333] p-6 flex flex-col justify-between">
+
+    <div>
+        <div class="flex flex-col items-center mb-10">
+            <img src="../<?php echo $_SESSION['profile_image_url'] ?? 'https://placehold.co/100x100/A78BFA/FFFFFF?text=A'; ?>" 
+                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/A78BFA/FFFFFF?text=A';"
+                 alt="Admin Profile"
+                 class="rounded-full w-24 h-24 mb-4 border-2 border-green-500 object-cover">
+
+            <h3 class="font-bold text-lg"><?php echo htmlspecialchars($_SESSION['full_name']); ?></h3>
+            <p class="text-sm bg-green-500 px-3 py-1 rounded-full mt-2">Administrator</p>
+        </div>
+
+        <ul class="space-y-2">
+
+            <!-- DATA BUKU -->
+            <li>
+                <a href="data-buku.php"
+                   class="flex items-center p-3 rounded-lg transition 
+                   <?php echo basename($_SERVER['PHP_SELF']) == 'data-buku.php' ? 
+                   'bg-[#A78BFA] text-black' : 'hover:bg-[#4F4F4F]'; ?>">
+                    <i data-lucide="book-open" class="mr-3"></i>
+                    Data Buku
+                </a>
+            </li>
+
+            <!-- DATA ANGGOTA -->
+            <li>
+                <a href="data-anggota.php"
+                   class="flex items-center p-3 rounded-lg transition
+                   <?php echo basename($_SERVER['PHP_SELF']) == 'data-anggota.php' ? 
+                   'bg-[#A78BFA] text-black' : 'hover:bg-[#4F4F4F]'; ?>">
+                    <i data-lucide="users" class="mr-3"></i>
+                    Data Anggota
+                </a>
+            </li>
+
+            <!-- TRANSAKSI -->
+            <li>
+                <a href="transaksi.php"
+                   class="flex items-center p-3 rounded-lg transition
+                   <?php echo in_array(basename($_SERVER['PHP_SELF']), ['transaksi.php', 'payment_confirmation.php']) ? 
+                   'bg-[#A78BFA] text-black' : 'hover:bg-[#4F4F4F]'; ?>">
+                    <i data-lucide="clipboard-list" class="mr-3"></i>
+                    Transaksi
+                </a>
+            </li>
+
+            <!-- LAPORAN -->
+            <li>
+                <a href="laporan.php"
+                   class="flex items-center p-3 rounded-lg transition
+                   <?php echo basename($_SERVER['PHP_SELF']) == 'laporan.php' ? 
+                   'bg-[#A78BFA] text-black' : 'hover:bg-[#4F4F4F]'; ?>">
+                    <i data-lucide="bar-chart-3" class="mr-3"></i>
+                    Laporan
+                </a>
+            </li>
+
+            <!-- EDIT PROFIL -->
+            <li>
+                <a href="profil-admin.php"
+                   class="flex items-center p-3 rounded-lg transition
+                   <?php echo basename($_SERVER['PHP_SELF']) == 'profil-admin.php' ? 
+                   'bg-[#A78BFA] text-black' : 'hover:bg-[#4F4F4F]'; ?>">
+                    <i data-lucide="user-cog" class="mr-3"></i>
+                    Edit Profil
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- LOGOUT -->
+    <div>
+        <a href="../php/logout.php"
+           class="flex items-center p-3 rounded-lg hover:bg-[#4F4F4F] transition">
+            <i data-lucide="log-out" class="mr-3"></i>
+            Logout
+        </a>
+    </div>
+
+</nav>
         
         <!-- Main Content -->
         <main class="flex-1 flex flex-col">
